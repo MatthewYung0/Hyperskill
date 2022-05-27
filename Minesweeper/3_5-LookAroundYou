@@ -11,6 +11,7 @@ public class Main {
     static int maxColumns = 9;
 
     public static void main(String[] args) {
+
         // Input for receiving number of mines
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many mines do you want on the field?");
@@ -34,7 +35,7 @@ public class Main {
         return minefield;
     }
 
-    // Randomly placing mines in the minefield
+    // Function for randomly placing mines in the minefield
     public static String[][] addMines(int numberOfMines, String[][] minefield) {
 
         // Variable for keeping track of how many mines are placed.
