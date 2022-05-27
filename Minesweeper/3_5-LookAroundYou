@@ -85,6 +85,8 @@ public class Main {
                 if (minefield[rowPos][columnPos].equals(mine)) {
                     for (int row = - 1; row < 2; row ++) {
                         for (int column = -1; column < 2; column++) {
+
+                            // if cell is out of bounds, ignore and continue with loop
                             try {
                                 minefield[rowPos + row][columnPos + column] = changeCellState(minefield[rowPos + row][columnPos + column]);
                             } catch (ArrayIndexOutOfBoundsException ignored) { }
