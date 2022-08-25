@@ -50,6 +50,7 @@ public class Main {
         } catch (NumberFormatException invalidFileName){
             isValidName = false;
         }
+        //fileName.matches("file[0-9]|file10");
         return isValidName;
     }
     public static void addToDataBase(String fileName, int index) {
