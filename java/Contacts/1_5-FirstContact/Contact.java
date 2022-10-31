@@ -13,6 +13,7 @@ public class Contact {
         this.firstName = requestFirstName(scanner);
         this.lastName = requestLastName(scanner);
         this.number = requestNumber(scanner);
+        scanner.close();
     }
 
     public String requestFirstName(Scanner scanner) {
