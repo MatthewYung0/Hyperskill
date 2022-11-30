@@ -1,10 +1,16 @@
 Description
 
-In daily life, we mostly use the decimal numeral system, but still, there are many other ways to represent numbers. For example, when working with computers, you'll probably deal with binary, octal, and hexadecimal numbers. It's really nice to have a tool that can help you easily and correctly convert numbers from one system to another: in this project, we will build such a tool step-by-step.
+In daily life, we mostly use the decimal numeral system, but still, there are many other ways to represent numbers. 
+For example, when working with computers, you'll probably deal with binary, octal, and hexadecimal numbers. 
+It's really nice to have a tool that can help you easily and correctly convert numbers from one system to another: in this project, we will build such a tool step-by-step.
 
-In the first stage, you need to implement conversion from decimal to binary, octal, and hexadecimal. The program will read the user's decimal number and the user's target radix (or base). Then, it will output the given number in the corresponding base.
+In the first stage, you need to implement conversion from decimal to binary, octal, and hexadecimal. 
+The program will read the user's decimal number and the user's target radix (or base). 
+Then, it will output the given number in the corresponding base.
 
-Converting from decimal to octal and hexadecimal isn't much different from converting to binary. The algorithm is really similar to binary conversion, only the base number is different with 8 or 16 in place of 2. See some examples of converting the number 110 from decimal to octal and hexadecimal below:
+Converting from decimal to octal and hexadecimal isn't much different from converting to binary. 
+The algorithm is really similar to binary conversion, only the base number is different with 8 or 16 in place of 2. 
+See some examples of converting the number 110 from decimal to octal and hexadecimal below:
 
 Quotient	Remainder of 8
 110	6
