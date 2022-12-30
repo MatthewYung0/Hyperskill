@@ -59,7 +59,6 @@ public class Main {
         } while (!isBack);
         return studentsAdded;
     }
-    // John Doe jdoe@mail.net
     public static boolean isValidFirstName(String firstName) {
         if (firstName.matches("^[a-zA-Z]([a-zA-Z]|[-'](?=[^-']))*[a-zA-Z]$")) {
             return true;
