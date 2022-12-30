@@ -87,10 +87,7 @@ public class Main {
     }
 
     public static boolean isValidCredentials(String[] details) {
-        int length = details.length;
-        String email = details[details.length - 1];
-        //&& email.matches("^[a-zA-Z0-9_\\-.]+@{1}\\w+\\.{1}\\w+")
-        if (length > 2) {
+        if (details.length > 2) {
             return true;
         } else {
             System.out.println("Incorrect credentials.");
