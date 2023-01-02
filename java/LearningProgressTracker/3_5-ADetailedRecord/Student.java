@@ -18,14 +18,14 @@ public class Student {
     }
 
     public void printPoints() {
-        System.out.print("Java=" + this.javaPoints + "; DSA=" + this.DSAPoints + "; Databases=" + this.databasePoints + "; Spring=" + this.springPoints);
+        System.out.print("Java=" + this.javaPoints + "; DSA=" + this.DSAPoints + "; Databases=" + this.databasePoints + "; Spring=" + this.springPoints + '\n');
     }
 
     public Student setPoints(int javaPoints, int DSAPoints, int databasePoints, int springPoints) {
-            this.javaPoints = javaPoints;
-            this.DSAPoints = DSAPoints;
-            this.databasePoints = databasePoints;
-            this.springPoints = springPoints;
+            this.javaPoints += javaPoints;
+            this.DSAPoints += DSAPoints;
+            this.databasePoints += databasePoints;
+            this.springPoints += springPoints;
             System.out.println("Points updated.");
             return this;
     }
