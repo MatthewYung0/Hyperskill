@@ -10,20 +10,16 @@ public class Main {
     private static final String[] database = new String[100];
 
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
         String input;
         boolean isExit = false;
-
         do {
             input = scanner.nextLine();
-            if (input.equalsIgnoreCase("exit")) {
+            if (input.toUpperCase().equals(COMMANDS.EXIT.toString())) {
                 isExit = true;
             } else if (isCorrectInput(input)) {
-
                 String[] messages = input.split(" ", 3);
                 int index = Integer.parseInt(messages[1]) - 1;
-
                 if (messages[0].equals("get") && !elementExists(index)) {
                     System.out.println("ERROR");
                 } else {
@@ -39,7 +35,6 @@ public class Main {
                         case "get" -> System.out.println(database[index]);
                     }
                 }
-
             } else {
                 System.out.println("ERROR");
             }
@@ -74,7 +69,6 @@ public class Main {
     private static boolean isCorrectLength(String input, COMMANDS command) {
         try {
             String[] inputs = input.split(" ");
-            int i = inputs.length;
             if (Objects.requireNonNull(command) == COMMANDS.SET) {
                 return inputs.length >= 3;
             } else {
@@ -90,7 +84,7 @@ public class Main {
         return inputCommand.equals(command.toString().toLowerCase());
     }
 
-    public static boolean elementExists(int index) {
+    private static boolean elementExists(int index) {
         return database[index] != null;
     }
 }
