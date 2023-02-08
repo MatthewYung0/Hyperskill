@@ -18,10 +18,8 @@ public class Main {
 
         try (Socket socket = new Socket(InetAddress.getByName(address), port)) {
             System.out.println("Client started!");
-
             DataInputStream inputStream = new DataInputStream(socket.getInputStream());
             DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-            System.out.print("Sent: ");
             if (args[0].toUpperCase().equals(COMMANDS.EXIT.toString())) {
                 outputStream.writeUTF(COMMANDS.EXIT.toString());
                 System.out.println(args[0]);
@@ -29,7 +27,6 @@ public class Main {
                 CommandLine commandLine = new CommandLine();
                 JCommander.newBuilder().addObject(commandLine).build().parse(args);
                 String command = commandLine.getInput();
-
                 outputStream.writeUTF(command);
                 printSentOutput(commandLine);
                 printReceivedInput(inputStream.readUTF());
@@ -42,6 +39,7 @@ public class Main {
     }
 
     public static void printSentOutput(CommandLine commandLine) {
+        System.out.print("Sent: ");
         String command = commandLine.getType().toLowerCase();
         if (command.equals(COMMANDS.SET.toString().toLowerCase())) {
             System.out.println("{\"type\":\"" + COMMANDS.SET.toString().toLowerCase() + "\",\"key\":\"" + commandLine.getIndex() + "\"" + ",\"value\":\"" + commandLine.getData() + "\"}");
