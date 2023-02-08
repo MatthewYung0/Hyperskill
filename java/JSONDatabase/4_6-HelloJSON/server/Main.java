@@ -27,9 +27,7 @@ public class Main {
                 Socket socket = server.accept();
                 DataInputStream input = new DataInputStream(socket.getInputStream());
                 DataOutputStream output = new DataOutputStream(socket.getOutputStream());
-
                 message = input.readUTF();
-
                 if (message.equalsIgnoreCase(COMMANDS.EXIT.toString())) {
                     isExit = true;
                     output.writeUTF(COMMANDS.EXIT.toString().toLowerCase());
@@ -69,6 +67,4 @@ public class Main {
     public static boolean elementExists(String index) {
         return database.get(index) != null;
     }
-
-
 }
