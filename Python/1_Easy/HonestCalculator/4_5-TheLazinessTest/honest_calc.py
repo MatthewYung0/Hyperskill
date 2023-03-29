@@ -11,6 +11,10 @@ msg_9 = "You are"
 
 operands = ["+", "-", "*", "/"]
 
+is_correct_equation = False
+
+memory = 0
+
 
 def is_one_digit(number):
     if -10 < number < 10 and number.is_integer():
@@ -34,10 +38,7 @@ def check(number_one, number_two, operation):
 
 
 def m_check(value):
-    if value == "M":
-        return memory
-    else:
-        return value
+    return memory if value == "M" else value
 
 
 def get_result(number_one, operand, number_two):
@@ -51,12 +52,7 @@ def get_result(number_one, operand, number_two):
         return number_one / number_two
 
 
-is_correct_equation = False
-
-memory = 0
-
 while not is_correct_equation:
-
     equation = input(msg_0 + "\n")
     variables = equation.split()
     variables[0] = m_check(variables[0])
@@ -80,7 +76,6 @@ while not is_correct_equation:
                 continue_calc = input(msg_5 + "\n")
                 if continue_calc != "y":
                     is_correct_equation = True
-
         else:
             print(msg_2)
     except ValueError:
