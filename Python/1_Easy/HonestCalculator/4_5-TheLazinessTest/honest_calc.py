@@ -22,31 +22,15 @@ def is_one_digit(number):
 def check(number_one, number_two, operation):
     msg = ""
     if is_one_digit(number_one) and is_one_digit(number_two):
-        msg = msg + msg_6
+        msg += msg_6
     if number_one == 1 or number_two == 1 and operation == operands[2]:
-        msg = msg + msg_7
+        msg += msg_7
     if number_one == 0 or number_two == 0 and (
             operation == operands[2] or operation == operands[0] or operation == operands[1]):
-        msg = msg + msg_8
+        msg += msg_8
     if msg != "":
         msg = msg_9 + msg
         print(msg)
-
-
-def multiply(number_one, number_two):
-    return number_one * number_two
-
-
-def divide(number_one, number_two):
-    return number_one / number_two
-
-
-def add(number_one, number_two):
-    return number_one + number_two
-
-
-def subtract(number_one, number_two):
-    return number_one - number_two
 
 
 def m_check(value):
@@ -58,13 +42,13 @@ def m_check(value):
 
 def get_result(number_one, operand, number_two):
     if operand == operands[0]:
-        return add(number_one, number_two)
+        return number_one + number_two
     elif operand == operands[1]:
-        return subtract(number_one, number_two)
+        return number_one - number_two
     elif operand == operands[2]:
-        return multiply(number_one, number_two)
+        return number_one * number_two
     else:
-        return divide(number_one, number_two)
+        return number_one / number_two
 
 
 is_correct_equation = False
