@@ -1,34 +1,37 @@
-import json
 import requests
 from bs4 import BeautifulSoup
 
-def main():
-    global title
-    global description
+
+def start_program():
+    info = {}
     print("Input the URL:")
-    link = input()
-    response = requests.get(link)
-    isInvalidLink = False
+    url = input()
+    headers = {'Accept-Language': 'en-US,en;q=0.5'}
+    return info, url, headers
 
-    if response.status_code == 200:
-        parser = "html.parser"
-        req = requests.get(link)
-        soup = BeautifulSoup(req.text, parser)
-        try:
-            title = soup.find('title').get_text()
-            description = soup.find('meta', {'name': 'description'}).get('content')
-        except:
-            title = "None"
-            description = "None"
 
-        if title == "None" or title == "" or description == "None" or description == "":
-            isInvalidLink = True
+def finish_program(result=''):
+    if not result:
+        print("\nInvalid page!")
     else:
-        isInvalidLink = True
+        print(result)
 
-    if isInvalidLink == True:
-        print("Invalid page!")
-    else:
-        print("{\"title\": \"" + title + "\", \"description\": \"" + description + "\"}")
+
+def get_result(info, url, headers):
+    resp = requests.get(url, headers=headers)
+    if resp and 'articles' in url:
+        soup = BeautifulSoup(resp.content, 'html.parser')
+        title = soup.find('title')
+        meta = soup.find('meta', {'name': 'description'})
+        info['title'] = title.text
+        info['description'] = meta.get('content')
+    return info
+
+
+def main():
+    info, url, headers = start_program()
+    result = get_result(info, url, headers)
+    finish_program(result)
+
 
 main()
