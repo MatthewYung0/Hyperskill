@@ -1,17 +1,15 @@
 def main():
-    user_input = input()
-    numbers = user_input.split(" ")
-    number_one = int(numbers[0])
-    number_two = int(numbers[2])
+    num_one, operand, num_two = input().split(" ")
 
-    if "+" in user_input:
-        print(number_one + number_two)
-    elif "-" in user_input:
-        print(number_one - number_two)
-    elif "*" in user_input:
-        print(number_one * number_two)
-    else:
-        print(number_one / number_two)
+    operation = {
+        "+": lambda x, y: x + y,
+        "-": lambda x, y: x - y,
+        "*": lambda x, y: x * y,
+    }
+
+    calculation_func = operation.get(operand)
+    result = calculation_func(int(num_one), int(num_two))
+    print(result)
 
 
 if __name__ == "__main__":
