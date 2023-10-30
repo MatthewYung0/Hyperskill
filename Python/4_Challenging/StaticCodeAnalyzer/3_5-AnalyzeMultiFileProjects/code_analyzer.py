@@ -100,16 +100,19 @@ def main(args):
         check_file(args.path)
     elif os.path.isdir(args.path):
         path = Path(args.path)
-        list_of_files = []
 
-        for file in path.iterdir():
-            list_of_files.append(file)
-
-        sorted_list = sorted(list_of_files, key=lambda x: x.name)
+        sorted_list = get_sorted_list_of_paths(path)
 
         for file in sorted_list:
             if file.is_file():
                 check_file(file)
+
+
+def get_sorted_list_of_paths(path):
+    list_of_files = []
+    for file in path.iterdir():
+        list_of_files.append(file)
+    return sorted(list_of_files, key=lambda x: x.name)
 
 
 def get_path():
