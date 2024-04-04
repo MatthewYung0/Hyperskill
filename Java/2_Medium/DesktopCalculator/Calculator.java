@@ -82,5 +82,4 @@ public class Calculator extends JFrame {
         }
         return problem + "=" + result;
     }
-
 }
