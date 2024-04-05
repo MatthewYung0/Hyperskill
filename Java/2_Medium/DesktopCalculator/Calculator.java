@@ -1,60 +1,87 @@
 package calculator;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Calculator extends JFrame {
     private String problem;
     private String answer;
+    private final String[][] BUTTON_TEXTS = {
+            {"7", "8", "9", "+"},
+            {"4", "5", "6", "-"},
+            {"1", "2", "3", "x"},
+            {"0", ".", "/", "="},
+    };
+    private final String[] BUTTON_NAMES = {
+            "Seven", "Eight", "Nine", "Add",
+            "Four", "Five", "Six", "Subtract",
+            "One", "Two", "Three", "Multiply",
+            "Zero", "Point", "Divide", "Equals"
+    };
 
     public Calculator() {
-        initialization();
+        JTextField equationTextField = createEquationTextField();
+        JPanel buttonPanel = createButtons(equationTextField);
+        JPanel mainPanel = createMainPanel(equationTextField, buttonPanel);
 
-        // Adding Text Field
-        JTextField equationTextField = getJTextField();
-        add(equationTextField);
-
-        // Adding JButton
-        JButton solveButton = getButton(equationTextField);
-        add(solveButton);
-
-        setVisible(true);
-    }
-
-    private void initialization() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 400);
-        setLayout(null);
-        setVisible(true);
         setTitle("Calculator");
+        getContentPane().add(mainPanel);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
-    private JTextField getJTextField() {
-        JTextField equationTextField = new JTextField();
-        equationTextField.setBounds(50, 50, 200, 30); // Adjust the bounds as needed
-        equationTextField.setName("EquationTextField");
-        return equationTextField;
-    }
+    private JPanel createButtons(JTextField textField) {
+        JPanel buttonPanel = new JPanel(new GridLayout(BUTTON_TEXTS.length, BUTTON_TEXTS[0].length));
+        int buttonCounter = 0;
+        for (int row = 0; row < BUTTON_TEXTS.length; row++) {
+            for (int column = 0; column < BUTTON_TEXTS[row].length; column++) {
+                JButton button = new JButton(BUTTON_TEXTS[row][column]);
+                button.setName(BUTTON_NAMES[buttonCounter]);
 
-    private JButton getButton(JTextField equationTextField) {
-        JButton solveButton = new JButton("Solve");
-        solveButton.setBounds(100, 100, 100, 30); // Adjust the bounds as needed
-        solveButton.setName("Solve");
-
-        solveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                problem = equationTextField.getText();
-                answer = calculate(problem);
-                equationTextField.setText(answer);
+                // Add action listener to each button
+                // If button is "=", execute the calculate function
+                if (BUTTON_TEXTS[row][column].equals("=")) {
+                    button.addActionListener(e -> {
+                        problem = textField.getText();
+                        answer = calculate(problem);
+                        textField.setText(answer);
+                    });
+                // Otherwise print the value of the button to the text instead
+                } else {
+                    button.addActionListener(e -> {
+                        JButton clickedButton = (JButton) e.getSource();
+                        String buttonText = clickedButton.getText();
+                        String currentEquation = textField.getText();
+                        textField.setText(currentEquation + buttonText);
+                    });
+                }
+                buttonPanel.add(button);
+                buttonCounter++;
             }
-        });
-        return solveButton;
+        }
+        return buttonPanel;
+    }
+
+    private JPanel createMainPanel(JTextField field, JPanel buttonPanel) {
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(field, BorderLayout.PAGE_START);
+        mainPanel.add(buttonPanel, BorderLayout.CENTER);
+        return mainPanel;
+    }
+
+    private JTextField createEquationTextField() {
+        JTextField textField = new JTextField(10);
+        textField.setName("EquationTextField");
+        return textField;
     }
 
     public String calculate(String problem) {
-        String[] parts = problem.split("[+\\-*/]");
+        String[] parts = problem.split("[+\\-x/]");
 
         // Parse operands
         int operand1 = Integer.parseInt(parts[0]);
@@ -71,7 +98,7 @@ public class Calculator extends JFrame {
             case '-':
                 result = operand1 - operand2;
                 break;
-            case '*':
+            case 'x':
                 result = operand1 * operand2;
                 break;
             case '/':
@@ -82,4 +109,5 @@ public class Calculator extends JFrame {
         }
         return problem + "=" + result;
     }
+
 }
